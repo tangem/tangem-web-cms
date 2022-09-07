@@ -2,23 +2,24 @@
 
 ## Using Environment Variables
 
-| Parameter              | Description                                                            |
-|------------------------|------------------------------------------------------------------------|
-| HOST                   | Host of application                                                    |
-| PORT                   | Port of application                                                    |
-| APP_KEYS               | Keys for application sessions                                          |
-| API_TOKEN_SALT         | New API tokens are generated using a salt                              |
-| ADMIN_JWT_SECRET       | Random string used to create new JWTs for admin                        |
-| JWT_SECRET             | Random string used to create new JWTs                                  |
-| AWS_REGION             | AWS region                                                             |
-| AWS_ACCESS_KEY_ID      | AWS access key id                                                      |
-| AWS_SECRET_ACCESS_KEY  | AWS secret access key                                                  |
-| AWS_PUBLIC_BUCKET_NAME | Name of AWS Bucket                                                     |
-| DATABASE_HOST          | Name of host to connect to Postgresql                                  |
-| DATABASE_PORT          | Port number to connect to at the Postgresql host                       |
-| DATABASE_USER          | PostgreSQL user name to connect as                                     |
-| DATABASE_PASSWORD      | Password to be used if the PostgreSQL demands password authentication. |
-| DATABASE_NAME          | The database name.                                                     |
+| Parameter             | Description                                                            |
+|-----------------------|------------------------------------------------------------------------|
+| HOST                  | Host of application                                                    |
+| PORT                  | Port of application                                                    |
+| APP_KEYS              | Keys for application sessions                                          |
+| API_TOKEN_SALT        | New API tokens are generated using a salt                              |
+| ADMIN_JWT_SECRET      | Random string used to create new JWTs for admin                        |
+| JWT_SECRET            | Random string used to create new JWTs                                  |
+| AWS_REGION            | AWS region                                                             |
+| AWS_ACCESS_KEY_ID     | AWS access key id                                                      |
+| AWS_SECRET_ACCESS_KEY | AWS secret access key                                                  |
+| AWS_BUCKET            | Name of AWS Bucket                                                     |
+| DATABASE_HOST         | Name of host to connect to Postgresql                                  |
+| DATABASE_PORT         | Port number to connect to at the Postgresql host                       |
+| DATABASE_USER         | PostgreSQL user name to connect as                                     |
+| DATABASE_PASSWORD     | Password to be used if the PostgreSQL demands password authentication. |
+| DATABASE_NAME         | The database name.                                                     |
+
 
 # 🚀 Getting started with Strapi
 
