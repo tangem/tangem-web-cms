@@ -1,16 +1,16 @@
 name: Deploy production tangem-web-cms to ECS
 
-#on:
-#   push:
-#    branches:
-#     - main
-#   workflow_dispatch:
+on:
+   push:
+    branches:
+     - main
+   workflow_dispatch:
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
   ECR_REPOSITORY: tangem-web-cms
   ECR_REPOSITORY_NGINX: tangem-web-cms-nginx
-  ECS_SERVICE: Tangem-web-cms
+  ECS_SERVICE: tangem-web-cms
   ECS_CLUSTER: Tangem-web
   ECS_TASK_DEFINITION: tangem-web-cms
   CONTAINER_NAME: tangem-web-cms
@@ -36,15 +36,13 @@ jobs:
        uses: aws-actions/amazon-ecr-login@v1
 
      - name: Create version file
-       run:
-          |
+       run: |
           cat << EOF > ./nginx/version.htm
           ${{ github.sha }}
           EOF
 
      - name: Create env file
-       run:
-          |
+       run: |
           cat << EOF > .env
           TANGEM_CMS_ENV_PROD=${{ secrets.TANGEM_CMS_ENV_PROD }}
           EOF
@@ -60,13 +58,6 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-
-     - name: Build, tag, and push image to Amazon ECR
-       id: build-image
-       env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
-      run: |
           cd ./nginx
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:latest
@@ -85,8 +76,13 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}.json
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
-#          container-name: ${{ env.CONTAINER_NAME_NGINX }}
-#          image: ${{ steps.build-image.outputs.nginx }}
+
+     - name: Fill in the new image ID in the Amazon ECS task definition
+       uses: aws-actions/amazon-ecs-render-task-definition@v1
+       with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          container-name: ${{ env.CONTAINER_NAME_NGINX }}
+          image: ${{ steps.build-image.outputs.nginx }}
 
      - name: Deploy Amazon ECS task definition
        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
