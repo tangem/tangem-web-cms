@@ -1,4 +1,4 @@
-name: Deploy development tangem-web-cms to ECS 
+name: Deploy development tangem-web-cms to ECS
 
 on:
    push:
