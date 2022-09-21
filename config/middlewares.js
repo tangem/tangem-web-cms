@@ -1,4 +1,4 @@
-module.exports = [
+module.exports = ({ env }) => [
   'strapi::errors',
   {
     name: 'strapi::security',
@@ -6,20 +6,20 @@ module.exports = [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:'],
+          'connect-src': ["'self'", 'https:', 'http'],
           'img-src': [
             "'self'",
             'data:',
             'blob:',
             'dl.airtable.com',
-            'sidorov-test.s3.amazonaws.com',
+            `${env('AWS_BUCKET')}.s3.amazonaws.com`,
           ],
           'media-src': [
             "'self'",
             'data:',
             'blob:',
             'dl.airtable.com',
-            'sidorov-test.s3.amazonaws.com',
+            `${env('AWS_BUCKET')}.s3.amazonaws.com`,
           ],
           upgradeInsecureRequests: null,
         },
