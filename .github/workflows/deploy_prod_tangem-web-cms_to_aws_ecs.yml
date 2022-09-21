@@ -1,0 +1,93 @@
+name: Deploy production tangem-web-cms to ECS
+
+on:
+   push:
+    branches:
+     - main
+   workflow_dispatch:
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  ECR_REPOSITORY: tangem-web-cms
+  ECR_REPOSITORY_NGINX: tangem-web-cms-nginx
+  ECS_SERVICE: tangem-web-cms
+  ECS_CLUSTER: Tangem-web
+  ECS_TASK_DEFINITION: tangem-web-cms
+  CONTAINER_NAME: tangem-web-cms
+  CONTAINER_NAME_NGINX: tangem-web-cms-nginx
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+
+     - name: Configure AWS credentials
+       uses: aws-actions/configure-aws-credentials@v1
+       with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: ${{ env.AWS_REGION }}
+     - name: Login to Amazon ECR
+       id: login-ecr
+       uses: aws-actions/amazon-ecr-login@v1
+
+     - name: Create version file
+       run: |
+          cat << EOF > ./nginx/version.htm
+          ${{ github.sha }}
+          EOF
+
+     - name: Create env file
+       run: |
+          cat << EOF > .env
+          TANGEM_CMS_ENV_PROD=${{ secrets.TANGEM_CMS_ENV_PROD }}
+          EOF
+
+     - name: Build, tag, and push image to Amazon ECR
+       id: build-image
+       env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+       run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          cd ./nginx
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:latest
+          echo "::set-output name=nginx::$ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG"
+
+     - name: Download task definition
+       run: |
+        aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} --query taskDefinition > ${{ env.ECS_TASK_DEFINITION }}.json
+
+     - name: Fill in the new image ID in the Amazon ECS task definition
+       id: task-def
+       uses: aws-actions/amazon-ecs-render-task-definition@v1
+       with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}.json
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+     - name: Fill in the new image ID in the Amazon ECS task definition
+       uses: aws-actions/amazon-ecs-render-task-definition@v1
+       with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          container-name: ${{ env.CONTAINER_NAME_NGINX }}
+          image: ${{ steps.build-image.outputs.nginx }}
+
+     - name: Deploy Amazon ECS task definition
+       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+       with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
