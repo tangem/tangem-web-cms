@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "name": {
+    "title": {
       "type": "string",
       "required": true,
       "unique": false,
@@ -29,7 +29,7 @@
     "slug": {
       "type": "uid",
       "required": true,
-      "targetField": "name"
+      "targetField": "title"
     },
     "image": {
       "type": "media",
