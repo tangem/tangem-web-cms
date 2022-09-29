@@ -1,20 +1,5 @@
 module.exports = ({ env }) => {
   return {
-    slugify: {
-      enabled: true,
-      config: {
-        contentTypes: {
-          category: {
-            field: 'slug',
-            references: 'title',
-          },
-          "blog-post": {
-            field: 'slug',
-            references: 'title',
-          }
-        },
-      },
-    },
     upload: {
       config: {
         provider: 'aws-s3',
