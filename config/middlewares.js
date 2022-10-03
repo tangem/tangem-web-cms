@@ -13,6 +13,7 @@ module.exports = ({ env }) => [
             'blob:',
             'dl.airtable.com',
             `${env('AWS_BUCKET')}.s3.amazonaws.com`,
+            `s3.${env('AWS_REGION')}.amazonaws.com/${env('AWS_BUCKET')}/`
           ],
           'media-src': [
             "'self'",
@@ -20,6 +21,7 @@ module.exports = ({ env }) => [
             'blob:',
             'dl.airtable.com',
             `${env('AWS_BUCKET')}.s3.amazonaws.com`,
+            `s3.${env('AWS_REGION')}.amazonaws.com/${env('AWS_BUCKET')}/`
           ],
           upgradeInsecureRequests: null,
         },
