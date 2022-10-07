@@ -10,13 +10,21 @@
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "title": {
       "type": "string",
       "required": true,
-      "unique": true,
-      "pluginOptions": {}
+      "unique": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "blog_posts": {
       "type": "relation",
@@ -25,10 +33,14 @@
       "mappedBy": "tags"
     },
     "slug": {
-      "pluginOptions": {},
-      "type": "uid",
-      "required": true,
-      "targetField": "title"
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "unique": false,
+      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     }
   }
 }

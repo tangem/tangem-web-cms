@@ -27,9 +27,14 @@
       }
     },
     "slug": {
-      "type": "uid",
-      "required": true,
-      "targetField": "title"
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "string",
+      "unique": false,
+      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
     "image": {
       "type": "media",
