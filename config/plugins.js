@@ -198,6 +198,12 @@ module.exports = ({ env }) => {
                   loading:true,
                 }
               },
+              {
+                name: 'a',
+                attributes: {
+                  name: true
+                }
+              }
             ]
           },
         }
