@@ -201,7 +201,8 @@ module.exports = ({ env }) => {
               {
                 name: 'a',
                 attributes: {
-                  name: true
+                  name: true,
+                  id: true,
                 }
               }
             ]
