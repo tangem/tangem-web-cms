@@ -201,7 +201,54 @@ module.exports = ({ env }) => {
               {
                 name: 'a',
                 attributes: {
-                  name: true,
+                  id: true,
+                }
+              },
+              {
+                name: 'p',
+                attributes: {
+                  id: true,
+                }
+              },
+              {
+                name: 'th',
+                attributes: {
+                  id: true,
+                }
+              },
+              {
+                name: 'h1',
+                attributes: {
+                  id: true,
+                }
+              },
+              {
+                name: 'h2',
+                attributes: {
+                  id: true,
+                }
+              },
+              {
+                name: 'h3',
+                attributes: {
+                  id: true,
+                }
+              },
+              {
+                name: 'h4',
+                attributes: {
+                  id: true,
+                }
+              },
+              {
+                name: 'span',
+                attributes: {
+                  id: true,
+                }
+              },
+              {
+                name: 'div',
+                attributes: {
                   id: true,
                 }
               }
