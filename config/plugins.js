@@ -1,3 +1,4 @@
+
 module.exports = ({ env }) => {
   return {
     upload: {
@@ -29,15 +30,72 @@ module.exports = ({ env }) => {
           // strapiTheme:false,
 
           // styles applied to editor container (global scope) //
-          // styles:`
-          // .ck.ck-editor__main .ck-focused{
-          //   max-height: 700px;
-          // }
-          // :root{
-          //   --ck-color-focus-border:red;
-          //   --ck-color-text:red;
-          // }
-          // `
+          styles:`
+            .ck {
+              --ck-color-base-border: #F5F5F5;
+              --ck-color-base-background: #F5F5F5;
+            }
+
+            .ck.ck-editor__main .ck-focused{
+              max-height: none;
+            }
+            .ck.ck-editor__main .ck-blurred {
+               max-height: none;
+            }
+            .ck.ck-editor__main blockquote,
+            .ck.ck-editor__main dl,
+            .ck.ck-editor__main dd,
+            .ck.ck-editor__main h1,
+            .ck.ck-editor__main h2,
+            .ck.ck-editor__main h3,
+            .ck.ck-editor__main h4,
+            .ck.ck-editor__main h5,
+            .ck.ck-editor__main h6,
+            .ck.ck-editor__main hr,
+            .ck.ck-editor__main p,
+            .ck.ck-editor__main pre {
+              margin-bottom: 1rem;
+            }
+
+            .ck.ck-editor__main p,
+            .ck.ck-editor__main ul,
+            .ck.ck-editor__main ol {
+              color: rgb(101 101 101);
+            }
+
+            .ck.ck-editor__main strong,
+            .ck.ck-editor__main h1,
+            .ck.ck-editor__main h2,
+            .ck.ck-editor__main h3,
+            .ck.ck-editor__main h4,
+            .ck.ck-editor__main h5,
+            .ck.ck-editor__main h6, {
+              color: rgb(30 30 30);
+            }
+
+            .ck.ck-editor__main ul {
+              margin: 1rem 0 1rem 2rem;
+              list-style: disc;
+            }
+
+            .ck.ck-editor__main ol {
+              margin: 1rem 0 1rem 2rem;
+              list-style: decimal;
+            }
+
+            .ck.ck-editor__main figure {
+              margin: 1rem auto;
+            }
+
+            .ck.ck-editor__main blockquote {
+              padding: 30px;
+              background: rgb(255 255 255);
+              border-radius: 16px;
+            }
+            .ck.ck-editor__main blockquote p {
+                margin-bottom: 0;
+            }
+          `
         },
         editor:{ // editor default config
 
@@ -251,6 +309,20 @@ module.exports = ({ env }) => {
                 attributes: {
                   id: true,
                 }
+              },
+              {
+                name: 'li',
+                attributes: {
+                  value: true,
+                }
+              },
+              {
+                name: 'video',
+                attributes: true,
+              },
+              {
+                name: 'iframe',
+                attributes: true,
               }
             ]
           },

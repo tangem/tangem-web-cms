@@ -23,6 +23,7 @@ module.exports = ({ env }) => [
             `${env('AWS_BUCKET')}.s3.amazonaws.com`,
             `s3.${env('AWS_REGION')}.amazonaws.com/${env('AWS_BUCKET')}/`
           ],
+          'frame-src': ['youtube.com', 'www.youtube.com'],
           upgradeInsecureRequests: null,
         },
       },
