@@ -20,7 +20,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "slugify": "^1.6.6",
-    "styled-components": "^6.1.8"
+    "styled-components": "^5.3.11"
   },
   "author": {
     "name": "Pavel Sidorov"
