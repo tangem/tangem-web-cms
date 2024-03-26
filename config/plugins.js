@@ -8,6 +8,7 @@ module.exports = ({ env }) => {
             accessKeyId: env('AWS_ACCESS_KEY_ID'),
             secretAccessKey: env('AWS_ACCESS_SECRET'),
             region: env('AWS_REGION'),
+            forcePathStyle: true,
             params: {
               ACL: env('AWS_ACL', 'public-read'),
               signedUrlExpires: env('AWS_SIGNED_URL_EXPIRES', 15 * 60),
@@ -18,7 +19,6 @@ module.exports = ({ env }) => {
               uploadStream: {},
               delete: {},
             },
-            s3ForcePathStyle: false,
           },
         },
       },
