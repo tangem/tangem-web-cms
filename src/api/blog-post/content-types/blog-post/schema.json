@@ -69,7 +69,7 @@
       },
       "type": "customField",
       "options": {
-        "preset": "custom"
+        "preset": "toolbar"
       },
       "customField": "plugin::ckeditor5.CKEditor"
     },
