@@ -33,20 +33,27 @@
       },
       "type": "text"
     },
-    "icon": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false,
+    "slug": {
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
-      }
+      },
+      "type": "enumeration",
+      "enum": [
+        "general",
+        "security",
+        "supported-assets",
+        "fund-transfer",
+        "app-functionality",
+        "acquisition",
+        "delivery-and-order-tracking",
+        "payment",
+        "placing-orders",
+        "returns-and-refunds",
+        "referral-program"
+      ],
+      "required": true
     }
   }
 }
