@@ -13,6 +13,7 @@ module.exports = ({ env }) => [
             'blob:',
             'dl.airtable.com',
             `${env('AWS_BUCKET')}.s3.amazonaws.com`,
+            `${env('AWS_BUCKET')}.s3.${env('AWS_REGION')}.amazonaws.com`,
             `s3.${env('AWS_REGION')}.amazonaws.com/${env('AWS_BUCKET')}/`
           ],
           'media-src': [
@@ -21,6 +22,7 @@ module.exports = ({ env }) => [
             'blob:',
             'dl.airtable.com',
             `${env('AWS_BUCKET')}.s3.amazonaws.com`,
+            `${env('AWS_BUCKET')}.s3.${env('AWS_REGION')}.amazonaws.com`,
             `s3.${env('AWS_REGION')}.amazonaws.com/${env('AWS_BUCKET')}/`
           ],
           'frame-src': ['youtube.com', 'www.youtube.com'],
