@@ -22,12 +22,14 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "glowColor": {
       "type": "customField",
       "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
-      "customField": "plugin::color-picker.color"
+      "customField": "plugin::color-picker.color",
+      "required": true
     },
     "faq": {
       "type": "json",
@@ -43,7 +45,8 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "aboutCoin": {
       "type": "richtext",
@@ -51,7 +54,8 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "networks": {
       "type": "text",
@@ -59,7 +63,8 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "descriptionFAQ": {
       "type": "text",
@@ -67,7 +72,8 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "slug": {
       "type": "string",
@@ -75,12 +81,13 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "logo": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -99,7 +106,8 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "featuresHeading": {
       "pluginOptions": {
