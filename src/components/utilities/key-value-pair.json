@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_utilities_key_value_pairs",
+  "info": {
+    "displayName": "KeyValuePair",
+    "icon": "key",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "text"
+    }
+  }
+}

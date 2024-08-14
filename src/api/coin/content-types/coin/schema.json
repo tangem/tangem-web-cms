@@ -31,14 +31,6 @@
       "customField": "plugin::color-picker.color",
       "required": false
     },
-    "faq": {
-      "type": "json",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "coinName": {
       "type": "string",
       "pluginOptions": {
@@ -148,6 +140,17 @@
         }
       },
       "type": "text"
+    },
+    "faq": {
+      "displayName": "KeyValuePair",
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "utilities.key-value-pair"
     }
   }
 }
